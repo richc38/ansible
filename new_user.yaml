@@ -1,0 +1,16 @@
+---
+- name: Create a new user
+  hosts: all 
+  become: yes
+  tasks:
+  
+    - name: Create a user
+      user: 
+        name: james
+        state: present
+        createhome: yes
+
+    - name: Create jamesfile in James's home directory
+        path: /home/james/jamesfile
+        state: touch
+        mode: '0644'
