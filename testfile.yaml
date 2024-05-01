@@ -1,0 +1,10 @@
+---
+- name: Create a testfile
+  hosts: all
+  become: yes
+  tasks:
+    - name: Create a testfile
+      file:  
+        path: /tmp/testfile
+        state: touch
+        mode: '0640'
