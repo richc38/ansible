@@ -1,0 +1,16 @@
+---
+- name: create dev-report file 
+  hosts: dev
+  become: yes
+  tasks:
+    - name: create dev-report file
+      file:
+        path: /tmp/dev-report
+        state: touch
+        mode: '0777'
+        owner: james
+        group: james
+    - name: Add a line to the file
+      lineinfile:
+        path: /tmp/dev-report
+        line: "This is my test to add a new line to file with a Ansible Playbook"

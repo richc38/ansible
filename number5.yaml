@@ -1,0 +1,8 @@
+---
+- name: website for num 5
+  hosts: dev
+  tasks:
+    - name: Create index.html file
+      copy:
+        content: "<html><body><h1>I created this with Ansible</h1></body></html>"
+        dest: /var/www/html/index.html

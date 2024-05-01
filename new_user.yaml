@@ -1,16 +1,18 @@
 ---
-- name: Create a new user
-  hosts: all 
-  become: yes
+- name: Create user James and file in his home directory
+  hosts: all
+
   tasks:
-  
-    - name: Create a user
-      user: 
+    - name: Create user James
+      user:
         name: james
         state: present
         createhome: yes
 
     - name: Create jamesfile in James's home directory
+      file:
         path: /home/james/jamesfile
         state: touch
-        mode: '0644'
+        owner: james
+        group: james
+        mode: 0644

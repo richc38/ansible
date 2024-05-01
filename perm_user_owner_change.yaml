@@ -1,0 +1,23 @@
+---
+- name: create owner/group and change permissions
+  hosts: dev
+
+  tasks:
+    - name: Create group dev
+      group:
+        name: dev
+        state: present
+
+    - name: Create user dev
+      user:
+        name: dev
+        state: present
+        createhome: yes
+        groups: dev 
+
+    - name: Change file permissions to 644 and owner/group owner to dev
+      file:
+        path: /tmp/dev-report
+        mode: '0644'            
+        owner: dev
+        group: dev
