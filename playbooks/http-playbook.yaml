@@ -1,0 +1,38 @@
+---
+  - name: setup http
+    hosts: servers
+    become: yes
+    vars: 
+      package: httpd
+    tasks:
+    - name: install http
+      yum: 
+        name: "{{ package }}"
+        state: present
+
+    - name: debug message
+      debug:
+        msg: "httpd has been installed"
+
+    - name: start/enable http
+      service:
+        name: "{{ package }}"
+        state: started
+        enabled: true
+    
+    - name: create a index.html file
+      lineinfile: 
+        path: /var/www/html/index.html
+        line: "I created this running a playbook"
+        create: true
+
+    - name: update firewall rules
+      firewalld:
+        service: http
+        permanent: true
+        state: enabled
+
+    - name: reload http
+      service: 
+        name: "{{ package }}"
+        state: reloaded

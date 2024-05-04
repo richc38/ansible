@@ -1,0 +1,14 @@
+---
+- name: installing various packages
+  hosts: servers
+  become: yes
+  vars:
+    pkg:
+    - httpd
+    - zip
+
+  tasks:
+    - name: install our packages
+      yum:
+        name: "{{ pkg }}"
+        state: present
